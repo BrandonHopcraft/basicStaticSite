@@ -1,7 +1,5 @@
 name: Azure Pages CI
 
-name: Azure Pages CI
-
 on:
   push:
     branches:
