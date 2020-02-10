@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build And Deploy
       id: azurepagesbuilddeploy
-      uses: joslinmicrosoft/staticsitesactionoryx@master
+      uses: BrandonHopcraft/anotherdeploy@master
       with:
         azure_pages_api_token: ${{ secrets.AZURE_PAGES_API_TOKEN_DELIGHTFUL_MUD_158A3A9E }}
         action: 'upload'
@@ -32,7 +32,7 @@ jobs:
     steps:
     - name: Close Pull Request
       id: azurepagesclosepullrequest
-      uses: joslinmicrosoft/staticsitesaction@master
+      uses: BrandonHopcraft/anotherdeploy@master
       with:
         azure_pages_api_token: ${{ secrets.AZURE_PAGES_API_TOKEN_DELIGHTFUL_MUD_158A3A9E }}
         action: 'close'
