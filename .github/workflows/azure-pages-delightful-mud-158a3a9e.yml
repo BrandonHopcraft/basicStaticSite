@@ -16,6 +16,7 @@ jobs:
     name: Azure Pages Build And Deploy
     steps:
     - uses: actions/checkout@v1
+      id: azurepagesbuilddeploy
     - shell: bash
     - uses: BrandonHopcraft/anotherdeploy@master
       with:
