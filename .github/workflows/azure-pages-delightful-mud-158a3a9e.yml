@@ -1,5 +1,7 @@
 name: Azure Pages CI
 
+name: Azure Pages CI
+
 on:
   push:
     branches:
@@ -10,27 +12,29 @@ on:
     - master
 
 jobs:
-  azure_pages_build_and_upload_job:
+  azure_pages_build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    name: Azure Pages Build And Deploy
+    name: Azure Pages Build and Deploy Job
     steps:
     - uses: actions/checkout@v1
+    - name: Build And Deploy
       id: azurepagesbuilddeploy
-    - shell: bash
-    - uses: BrandonHopcraft/anotherdeploy@master
+      uses: joslinmicrosoft/staticsitesactionoryx@master
       with:
         azure_pages_api_token: ${{ secrets.AZURE_PAGES_API_TOKEN_DELIGHTFUL_MUD_158A3A9E }}
-        action: 'upload --verbose'         
-        app_artifact_location: 'app/build'
-        api_artifact_location: 'api'
-  
-  azure_pages_close_pr_job:
+        action: 'upload'
+        app_artifact_location: 'app' # App Content Path
+        api_artifact_location: 'api' # Api Content Path - optional
+
+  azure_pages_close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Azure Pages Close Pull Request Job
     steps:
-    - uses: BrandonHopcraft/anotherdeploy@master
+    - name: Close Pull Request
+      id: azurepagesclosepullrequest
+      uses: joslinmicrosoft/staticsitesaction@master
       with:
         azure_pages_api_token: ${{ secrets.AZURE_PAGES_API_TOKEN_DELIGHTFUL_MUD_158A3A9E }}
         action: 'close'
